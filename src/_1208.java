@@ -1,0 +1,33 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class _1208 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int S = Integer.parseInt(st.nextToken());
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 0; i < N; i++) {
+            int num = Integer.parseInt(st.nextToken());
+            HashMap<Integer, Integer> appendMap = new HashMap<>();
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                appendMap.put(entry.getKey() + num, entry.getValue());
+            }
+
+            for (Map.Entry<Integer, Integer> entry : appendMap.entrySet()) {
+                map.put(entry.getKey(), map.getOrDefault(entry.getKey(), 0) + entry.getValue());
+            }
+
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        System.out.println(map.get(S));
+    }
+}
